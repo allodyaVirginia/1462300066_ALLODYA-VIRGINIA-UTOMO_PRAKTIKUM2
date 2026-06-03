@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'detail_movie_screen.dart';
 import 'profile_screen.dart';
+import 'register_screen.dart';
 
 class Film {
   final String judul;
@@ -28,7 +29,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   int selectedIndex = 0;
 
   final Film harryPotter = Film(
@@ -69,11 +69,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     List<Widget> halaman = [
       homeContent(),
       homeContent(),
       const ProfileScreen(),
+      RegisterScreen(),
     ];
 
     return Scaffold(
@@ -82,20 +82,15 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text(
           "MOVIE APP",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
 
         centerTitle: true,
         backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        foregroundColor: Colors.pinkAccent,
 
         shape: const Border(
-          bottom: BorderSide(
-            color: Colors.black,
-            width: 1.5,
-          ),
+          bottom: BorderSide(color: Colors.pinkAccent, width: 1.5),
         ),
       ),
 
@@ -112,24 +107,21 @@ class _HomePageState extends State<HomePage> {
           });
         },
 
-        selectedItemColor: Colors.black,
+        type: BottomNavigationBarType.fixed,
+
+        selectedItemColor: Colors.pinkAccent,
         unselectedItemColor: Colors.grey,
 
         items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+
+          BottomNavigationBarItem(icon: Icon(Icons.movie), label: "Movie"),
+
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
 
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.movie),
-            label: "Movie",
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
+            icon: Icon(Icons.app_registration),
+            label: "Registrasi",
           ),
         ],
       ),
@@ -139,26 +131,17 @@ class _HomePageState extends State<HomePage> {
   // HALAMAN HOME
   Widget homeContent() {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 14,
-        vertical: 12,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
 
       child: Column(
         children: [
-
           Row(
             children: [
-
-              Expanded(
-                child: itemFilm(harryPotter),
-              ),
+              Expanded(child: itemFilm(harryPotter)),
 
               const SizedBox(width: 14),
 
-              Expanded(
-                child: itemFilm(avatar),
-              ),
+              Expanded(child: itemFilm(avatar)),
             ],
           ),
 
@@ -166,16 +149,11 @@ class _HomePageState extends State<HomePage> {
 
           Row(
             children: [
-
-              Expanded(
-                child: itemFilm(flash),
-              ),
+              Expanded(child: itemFilm(flash)),
 
               const SizedBox(width: 14),
 
-              Expanded(
-                child: itemFilm(avangers),
-              ),
+              Expanded(child: itemFilm(avangers)),
             ],
           ),
         ],
@@ -197,16 +175,13 @@ class _HomePageState extends State<HomePage> {
 
       child: Column(
         children: [
-
           // GAMBAR FILM
           Container(
             height: 190,
             width: double.infinity,
 
             decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.black87,
-              ),
+              border: Border.all(color: Colors.pinkAccent),
 
               borderRadius: BorderRadius.circular(6),
             ),
@@ -214,10 +189,7 @@ class _HomePageState extends State<HomePage> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(5),
 
-              child: Image.network(
-                film.gambar,
-                fit: BoxFit.cover,
-              ),
+              child: Image.network(film.gambar, fit: BoxFit.cover),
             ),
           ),
 
@@ -233,19 +205,14 @@ class _HomePageState extends State<HomePage> {
 
               borderRadius: BorderRadius.circular(4),
 
-              border: Border.all(
-                color: Colors.black,
-              ),
+              border: Border.all(color: Colors.pinkAccent),
             ),
 
             child: Text(
               film.judul,
               textAlign: TextAlign.center,
 
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-              ),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
           ),
         ],
